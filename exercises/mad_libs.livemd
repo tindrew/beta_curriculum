@@ -40,7 +40,11 @@ blank3 = "code"
 Enter your solution below.
 
 ```elixir
+animal = "dog"
+people = "princesses"
+place = "california"
 
+sentence = "A programmer is a " <> animal <> " that turns " <> people <> " into " <> place <> " ."
 ```
 
 ## String Interpolation Madlib
@@ -65,7 +69,11 @@ blank3 = "foobar"
 Enter your solution below.
 
 ```elixir
+animal = "horse"
+people = "blind melons"
+place = "Chicago"
 
+sentence = "#{animal} and #{people} combined makes #{place}"
 ```
 
 ## Mark As Completed

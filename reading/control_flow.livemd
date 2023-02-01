@@ -120,6 +120,10 @@ end
 
 Enter your solution below.
 
+<!-- livebook:{"break_markdown":true} -->
+
+
+
 ```elixir
 
 ```
@@ -266,7 +270,7 @@ We can provide any number of cases. Cases use pattern matching to decide which r
 Return each value from `1` to `5` by changing the `condition` variable below.
 
 ```elixir
-condition = nil
+condition = %{key: "value"}
 
 case condition do
   :red -> 1

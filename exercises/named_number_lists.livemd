@@ -75,7 +75,7 @@ flowchart
 Enter your solution below.
 
 ```elixir
-
+random_ints = [3, 4, 5, 9, 0, 3, 4, 5]
 ```
 
 ## Mark As Completed

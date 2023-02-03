@@ -339,6 +339,27 @@ Enum.map(%{"one" => 1, "two" => 2}, fn element -> element end)
 Enum.map([one: 1, two: 2], fn element -> element end)
 ```
 
+```elixir
+defmodule Fizzbuzz do
+  def run(range) do
+    Enum.map(range, fn num ->
+      cond do
+        rem(num, 3) == 0 ->
+          "fizz"
+
+        rem(num, 5) == 0 ->
+          "buzz"
+
+        false ->
+          nil
+      end
+    end)
+  end
+end
+
+Fizzbuzz.run(1..10)
+```
+
 We can even pattern match on the key and value in the tuple.
 
 ```elixir
@@ -371,7 +392,7 @@ Use [Enum.map/2](https://hexdocs.pm/elixir/1.12/Enum.html#map/2) to convert a li
 Enter your solution below.
 
 ```elixir
-
+Enum.map(1..10, fn integer -> "#{integer}" end)
 ```
 
 ## Enum.reduce/2 and Enum.reduce/3
@@ -530,7 +551,7 @@ odd_numbers = Enum.filter(1..10, fn integer -> rem(integer, 2) != 0 end)
 Enter your solution below.
 
 ```elixir
-
+Enum.filter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fn odd -> odd )
 ```
 
 ## Enum.all?/2
@@ -749,17 +770,6 @@ We can also use the capture operator alone to create an anonymous function. Howe
 Enum.map(1..10, &(&1 * 2))
 ```
 
-## Further Reading
-
-The [Enum](https://hexdocs.pm/elixir/Enum.html) module has many more functions. You'll have the opportunity to encounter more as you need them to solve future challenges.
-
-For more information, you may also wish to read:
-
-* [The Enum Documentation](https://hexdocs.pm/elixir/Enum.html)
-* [Elixir Schools Enum](https://elixirschool.com/en/lessons/basics/enum)
-
-We have several exercises dedicated to the [Enum](https://hexdocs.pm/elixir/Enum.html) module as part of this curriculum. However, if you wish for more practice [Exercism.io](https://exercism.org/tracks/elixir/concepts/enum) has a number of excellent exercises.
-
 ## Mark As Completed
 
 <!-- livebook:{"attrs":{"source":"file_name = Path.basename(Regex.replace(~r/#.+/, __ENV__.file, \"\"), \".livemd\")\n\nsave_name =\n  case Path.basename(__DIR__) do\n    \"reading\" -> \"enum_reading\"\n    \"exercises\" -> \"enum_exercise\"\n  end\n\nprogress_path = __DIR__ <> \"/../progress.json\"\nexisting_progress = File.read!(progress_path) |> Jason.decode!()\n\ndefault = Map.get(existing_progress, save_name, false)\n\nform =\n  Kino.Control.form(\n    [\n      completed: input = Kino.Input.checkbox(\"Mark As Completed\", default: default)\n    ],\n    report_changes: true\n  )\n\nTask.async(fn ->\n  for %{data: %{completed: completed}} <- Kino.Control.stream(form) do\n    File.write!(\n      progress_path,\n      Jason.encode!(Map.put(existing_progress, save_name, completed), pretty: true)\n    )\n  end\nend)\n\nform","title":"Track Your Progress"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
@@ -797,6 +807,17 @@ end)
 
 form
 ```
+
+## Further Reading
+
+The [Enum](https://hexdocs.pm/elixir/Enum.html) module has many more functions. You'll have the opportunity to encounter more as you need them to solve future challenges.
+
+For more information, you may also wish to read:
+
+* [The Enum Documentation](https://hexdocs.pm/elixir/Enum.html)
+* [Elixir Schools Enum](https://elixirschool.com/en/lessons/basics/enum)
+
+We have several exercises dedicated to the [Enum](https://hexdocs.pm/elixir/Enum.html) module as part of this curriculum. However, if you wish for more practice [Exercism.io](https://exercism.org/tracks/elixir/concepts/enum) has a number of excellent exercises.
 
 ## Commit Your Progress
 

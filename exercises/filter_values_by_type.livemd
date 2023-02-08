@@ -73,6 +73,16 @@ end
 Enter your solution below.
 
 ```elixir
+value = 5
+
+is_integer(value)
+```
+
+```elixir
+
+```
+
+```elixir
 defmodule Filter do
   @doc """
   Filter in integers in list.
@@ -83,6 +93,9 @@ defmodule Filter do
     [1, 2]
   """
   def integers(list) do
+    Enum.filter(list, fn non_integers ->
+      is_integer(non_integers)
+    end)
   end
 
   @doc """
@@ -94,6 +107,9 @@ defmodule Filter do
     [1.2, 3.2]
   """
   def floats(list) do
+    Enum.filter(list, fn element ->
+      is_float(element)
+    end)
   end
 
   @doc """
@@ -105,6 +121,9 @@ defmodule Filter do
     [1, 2, 1.2, 3.2]
   """
   def numbers(list) do
+    Enum.filter(list, fn element ->
+      is_number(element)
+    end)
   end
 
   @doc """
@@ -116,6 +135,9 @@ defmodule Filter do
     [:first_atom, :second_atom]
   """
   def atoms(list) do
+    Enum.filter(list, fn element ->
+      is_atom(element)
+    end)
   end
 
   @doc """
@@ -124,9 +146,12 @@ defmodule Filter do
   ## Examples
 
     iex> Filter.lists([1, 2, %{}, {}, [], 1.2, 3.2, :atom, [1, 2], [4, 5, 6]])
-    [[1, 2], [4, 5, 6]]
+    [[], [1, 2], [4, 5, 6]]
   """
   def lists(list) do
+    Enum.filter(list, fn element ->
+      is_list(element)
+    end)
   end
 
   @doc """
@@ -138,6 +163,9 @@ defmodule Filter do
     [%{}, %{key: "value"}]
   """
   def maps(list) do
+    Enum.filter(list, fn element ->
+      is_map(element)
+    end)
   end
 
   @doc """
@@ -149,8 +177,13 @@ defmodule Filter do
     [[], [key: "value"]]
   """
   def keyword_lists(list) do
+    Enum.filter(list, fn element ->
+      Keyword.keyword?(element)
+    end)
   end
 end
+
+Filter.keyword_lists([1, 2, %{}, {}, [], 1.2, 3.2, :atom, %{key: "value"}, [key: "value"]])
 ```
 
 ## Mark As Completed

@@ -16,6 +16,19 @@ Mix.install([
 
 ## Number Finder
 
+```elixir
+# take each item in the list
+# compare it to the accumulator
+# if its bigger, put it in the accumulator
+# if its smaller, don't
+
+list = [4, 1, 2]
+
+Enum.reduce(list, fn element, acc ->
+  max(acc, element)
+end)
+```
+
 Create a `NumberFinder` module which can find the `smallest/1` number in a list, and the `largest/1` number in a list.
 
 <!-- livebook:{"force_markdown":true} -->
@@ -43,6 +56,9 @@ defmodule NumberFinder do
     -3
   """
   def smallest(number_list) do
+    Enum.reduce(number_list, fn element, acc ->
+      min(acc, element)
+    end)
   end
 
   @doc """
@@ -58,8 +74,13 @@ defmodule NumberFinder do
     20
   """
   def largest(number_list) do
+    Enum.reduce(number_list, fn element, acc ->
+      max(acc, element)
+    end)
   end
 end
+
+NumberFinder.smallest([2, 2, 3, 4, 10, 20, -3])
 ```
 
 ## Mark As Completed

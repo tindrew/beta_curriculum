@@ -75,20 +75,28 @@ Implement the `WeightedVoting` module as documented below.
 
 ```elixir
 defmodule WeightedVoting do
-  @doc """
-  Count the total number of votes for some key in a keyword list.
+  # @doc """
+  # Count the total number of votes for some key in a keyword list.
 
-  ## Examples
+  # ## Examples
 
-    iex> WeightedVoting.count([dogs: 20, dogs: 10], :dogs)
-    30
-    iex> WeightedVoting.count([cats: 10, dogs: 20, dogs: 30], :dogs)
-    50
-    iex> WeightedVoting.count([cats: 10, dogs: 20, dogs: 10, cats: 30], :cats)
-    40
-  """
-  def count(votes, vote_to_count) do
-  end
+  #   iex> WeightedVoting.count([dogs: 20, dogs: 10], :dogs)
+  #   30
+  #   iex> WeightedVoting.count([cats: 10, dogs: 20, dogs: 30], :dogs)
+  #   50
+  #   iex> WeightedVoting.count([cats: 10, dogs: 20, dogs: 10, cats: 30], :cats)
+  #   40
+  # """
+  # def count(votes, vote_to_count) do
+
+  # #   total_animals = Enum.filter(votes, fn tuple -> elem(tuple, 0) == vote_to_count end)
+  # #   animal_values = Enum.map(total_animals, fn animal -> elem(animal, 1) end)
+  # #   Enum.sum(animal_values)
+
+  #    Enum.filter(votes, fn tuple -> elem(tuple, 0) == vote_to_count end)
+  #   |> Enum.map(fn animal -> elem(animal, 1) end)
+  #   |> Enum.sum()
+  # end
 
   @doc """
   Tally the total number of votes in a keyword list, and return
@@ -100,12 +108,18 @@ defmodule WeightedVoting do
 
     iex> WeightedVoting.tally([dogs: 20, dogs: 10])
     [dogs: 30]
-    iex> WeightedVoting.tally([cats: 10, dogs: 20, dogs: 10])
-    [cats: 10, dogs: 30]
-    iex> WeightedVoting.tally([cats: 10, dogs: 20, cats: 20, dogs: 10, birds: 20])
-    [birds: 20, cats: 30, dogs: 30]
+    # iex> WeightedVoting.tally([cats: 10, dogs: 20, dogs: 10])
+    # [cats: 10, dogs: 30]
+    # iex> WeightedVoting.tally([cats: 10, dogs: 20, cats: 20, dogs: 10, birds: 20])
+    # [birds: 20, cats: 30, dogs: 30]
   """
   def tally(votes) do
+    # poopoo_box = Enum.reduce(votes, 0, fn tuple, acc -> elem(tuple, 1) + acc end) 
+    # [{:dogs, poopoo_box}]
+    Enum.reduce(votes, [], fn tuple, acc ->
+      List.update_at(acc, tuple, 0, fn current -> current + 1 end)
+      Keyword.update!()
+    end)
   end
 end
 ```

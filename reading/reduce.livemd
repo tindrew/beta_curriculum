@@ -198,6 +198,14 @@ Enum.reduce(digits, %{}, fn integer, acc ->
 end)
 ```
 
+```elixir
+num_string = Integer.to_string(1_234_321) |> String.split("", trim: true)
+
+Enum.reduce(num_string, %{}, fn char, acc ->
+  Map.update(acc, char, 1, fn current -> current + 1 end)
+end)
+```
+
 ## Multiple Accumulators
 
 One trick for reduce is to use a collection data-type to simulate having multiple accumulators.

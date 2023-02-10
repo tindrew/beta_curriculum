@@ -34,6 +34,14 @@ end
 Implement the `Itinerary` module as documented.
 
 ```elixir
+
+```
+
+```elixir
+DateTime.diff(~U[2020-01-03 12:00:00Z], ~U[2020-01-01 12:10:00Z], :minute)
+```
+
+```elixir
 defmodule Itinerary do
   @doc """
   Given a number of minutes, determine if there is enough time 
@@ -58,6 +66,9 @@ defmodule Itinerary do
     
   """
   def has_time?(start, finish, minutes) do
+    available_time_seconds = DateTime.diff(finish, start)
+    seconds = minutes * 60
+    available_time_seconds >= seconds
   end
 end
 ```

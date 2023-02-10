@@ -71,6 +71,39 @@ end
 Implement the `CaesarCypher` module as documented.
 
 ```elixir
+
+# String.graphemes("a")
+
+# take a string, convert it to code point
+# add a number
+#convert it back to a string
+
+string = to_charlist("abcdefghijklmnopqrstuvwxyz")
+
+Enum.map(string, fn char -> 
+  
+  if char do
+    
+  else
+    char + 2 
+  end
+  
+
+end)
+  
+end
+
+
+
+
+ 
+ 
+
+ 
+
+```
+
+```elixir
 defmodule CaesarCypher do
   @moduledoc """
   Documentation for `CaesarCypher`

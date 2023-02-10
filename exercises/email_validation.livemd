@@ -57,6 +57,26 @@ end
 Implement the `Email` module as documented.
 
 ```elixir
+good_string = "mail@mail.com"
+bad_string = "mail.com"
+
+email_regex = ~r/
+  \w+    # user
+  @      # @ 
+  \w+    # host
+  [.]    # .
+  \w+    # domain
+  /x
+
+Regex.scan(email_regex, good_string)
+IO.puts(Regex.source(email_regex))
+```
+
+```elixir
+
+```
+
+```elixir
 defmodule Email do
   @moduledoc """
   Documentation for `Email`
@@ -89,6 +109,16 @@ defmodule Email do
     false
   """
   def valid?(email) do
+    Regex.match?(
+      ~r/
+  \w+    # user
+  @      # @ 
+  \w+    # host
+  [.]    # .
+  \w+    # domain
+/x,
+      email
+    )
   end
 end
 ```

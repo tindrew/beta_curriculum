@@ -44,6 +44,48 @@ second list at the same index.
 For example:
 
 ```elixir
+input1 = [1, nil, 3]
+input2 = [4, 5, nil]
+
+zipped = Enum.zip(input1, input2) |> IO.inspect()
+
+Enum.map(zipped, fn
+  {nil, elem2} -> elem2
+  {elem1, _} -> elem1
+end)
+```
+
+```elixir
+input1 = [1, nil, 3]
+input2 = [4, 5, nil]
+
+# Enum.reduce(input1, [], fn each, acc -> (each == nil && Enum.at(input2, acc)) || each end)
+
+# step 1 1, 4 -> 1
+
+# step 2 nil, 5 -> 5
+
+# step 3 3, nil -> 3
+
+# five ideas:
+# :1 zip the list
+# 2: use index Enum.with_index
+# 3: hd(), tl(), recursion
+#
+
+# input1 = input2 
+# Enum.map(input1, fn each -> (each == nil && input2) || each 
+
+# end)
+Enum.zip(input1, input2)
+Enum.with_index(input1)
+
+# Enum.reduce(input1, 0, fn each, acc -> 
+#   List.replace_at(input1, acc, each == nil && Enum.at(input2, acc) || each) 
+# end)
+```
+
+```elixir
 list1 = [0, nil, 2, 3, nil]
 list2 = [:a, :b, :c, :d, :e]
 
@@ -61,11 +103,21 @@ defmodule ReplaceNils do
   Replace Nils
   """
 
+  # fucktion = fn e1, e2 -> e1 || e2 end
+
+  # Enum.zip(l1, l2)
+  # |> Enum.map(fn {e1, e2} -> fucktion.(e1, e2) end)
+
   @doc """
   replace nil values in the first list with values from the second list in the same position.
   """
-  def replace(input1, input2) do
-    nil
+  def replace(list1, list2) do
+    list1
+    |> Enum.with_index()
+    |> Enum.reduce([], fn {e1, index}, acc ->
+      [e1 || Enum.at(list2, index) | acc]
+    end)
+    |> Enum.reverse()
   end
 end
 ```

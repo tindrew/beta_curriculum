@@ -91,8 +91,7 @@ game = %{
   }
 }
 
-game.round1.team1
-game.round1.team1 + game.round2.team1 + game.round3.team1
+game.round2.team2
 ```
 
 ```elixir

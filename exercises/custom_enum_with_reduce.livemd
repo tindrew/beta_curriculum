@@ -92,6 +92,7 @@ defmodule CustomEnum do
     [true, true, true]
   """
   def map(list, callback_function) do
+
   end
 
   @doc """
@@ -107,6 +108,7 @@ defmodule CustomEnum do
     ["2", "3"]
   """
   def filter(list, callback_function) do
+
   end
 
   @doc """
@@ -121,6 +123,7 @@ defmodule CustomEnum do
     3
   """
   def sum(list_of_integers) do
+    Enum.reduce(list_of_integers, )
   end
 
   @doc """

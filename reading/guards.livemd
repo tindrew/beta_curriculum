@@ -67,7 +67,7 @@ defmodule MutlipleGuardExample do
   end
 end
 
-MutlipleGuardExample.double(1.3)
+MutlipleGuardExample.double(5)
 ```
 
 While useful for demonstration, we should realistically use the `is_number/1` guard instead.
@@ -79,7 +79,7 @@ defmodule NumberGuardExample do
   end
 end
 
-NumberGuardExample.double(1.3)
+NumberGuardExample.double("1.3")
 ```
 
 Guards must return `true` or `false` values and be pure input and output.
@@ -233,9 +233,12 @@ end
 
 ```elixir
 defmodule Say do
-  def hello(name) do
+  def hello(name) when is_binary(name) do
+    "Hello, #{name}!"
   end
 end
+
+Say.hello("asshole")
 ```
 
 ### Your Turn
@@ -277,7 +280,7 @@ Enter your solution below.
 
 ```elixir
 defmodule Percent do
-  def display(percent) do
+  def display(percent) when 0 <= percent and percent <= 100 do
   end
 end
 ```

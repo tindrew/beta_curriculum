@@ -74,6 +74,27 @@ end
 Enter your solution below.
 
 ```elixir
+game = %{
+  team1_name: "Team Team",
+  team2_name: "Exersport",
+  round1: %{
+    team1: 10,
+    team2: 20
+  },
+  round2: %{
+    team1: 30,
+    team2: 10
+  },
+  round3: %{
+    team1: 25,
+    team2: 30
+  }
+}
+
+game.round2.team2
+```
+
+```elixir
 defmodule Points do
   @doc """
   Tally points in a generic three round game.
@@ -89,23 +110,19 @@ defmodule Points do
       iex> Points.tally(%{no_team_names: true})
       {:error, :invalid}
 
-  The `game` must have a `round1`, `round2`, and `round3` keys.
+  # The `game` must have a `round1`, `round2`, and `round3` keys.
 
-      iex> Points.tally(%{team1_name: "name1", team2_name: "name2"})
-      {:error, :invalid}
+  #     iex> Points.tally(%{team1_name: "name1", team2_name: "name2"})
+  #     {:error, :invalid}
   """
   def tally(game) do
-    with %{team1_name: team1, team2_name: team2} <- game,
-         %{round1: %{team1: t1r1, team2: t2r1}} <- game,
-         %{round2: %{team1: t1r2, team2: t2r2}} <- game,
-         %{round3: %{team1: t1r3, team2: t2r3}} <- game do
-      %{}
-      |> Map.put(team1, t1r1 + t1r2 + t1r3)
-      |> Map.put(team2, t2r1 + t2r2 + t2r3)
-    else
-      error ->
-        {:error, :invalid}
+    with %{team1_name: team1, team2_name: team2} <- game do
     end
+
+    %{
+      game.team1_name => game.round1.team1 + game.round2.team1 + game.round3.team1,
+      game.team2_name => game.round1.team2 + game.round2.team2 + game.round3.team2
+    }
   end
 end
 ```

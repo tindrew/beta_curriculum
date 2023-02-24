@@ -58,6 +58,10 @@ defmodule Barbarian do
 end
 ```
 
+```elixir
+
+```
+
 You should be able to check if a character can attack a coordinate `{x, y}` given their
 starting location in `{x, y}`.
 
@@ -128,6 +132,10 @@ defprotocol Character do
     true
   """
   def can_attack?(character, origin, target)
+end
+
+defimple Character, for: Barbarian do
+  def can_attack?()
 end
 
 ExUnit.start(auto_run: false)

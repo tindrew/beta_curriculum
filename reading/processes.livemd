@@ -212,7 +212,8 @@ Spawn a linked process and crash this Elixir cell below.
 Comment out your solution when complete to avoid continuously crashing the livebook!
 
 ```elixir
-
+# pid2 = spawn_link(fn -> raise "oops" end)
+# Process.link(pid2)
 ```
 
 ## Message Passing
@@ -327,7 +328,7 @@ CounterProcess --> loop --0--> receive --1--> loop
 ```
 
 ```elixir
-defmodule CounterProcess do
+defmodule CounterProcess1 do
   def loop(state \\ 0) do
     IO.inspect(state, label: "counter")
 
@@ -357,7 +358,7 @@ to store some value for the duration of the program.
 Modify the `Counter` module below so it can receive a `:decrement` message to decrement the current count.
 
 ```elixir
-defmodule Counter do
+defmodule Counter1 do
   def loop(state \\ 0) do
     IO.inspect(state, label: "counter")
 
@@ -373,7 +374,7 @@ counter_process = spawn(fn -> Counter.loop() end)
 You should be able to send a `:decrement` message to a spawned `Counter`. Uncomment and evaluate the code below to test your solution.
 
 ```elixir
-# send(counter_process, :decrement)
+send(counter_process, :decrement)
 ```
 
 ## Mark As Completed

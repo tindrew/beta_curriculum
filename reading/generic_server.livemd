@@ -304,6 +304,21 @@ note_book = GenericServer.start(NoteBook)
 
 ```elixir
 defmodule NoteBook do
+  use GenServer
+
+  def init(nil) do
+    []
+  end
+
+  def handle_call({:add_note, note}, state) do
+    new_state = state ++ [note]
+    {{:ok, new_state}, state ++ [note]}
+  end
+
+  #  def handle_call({:add_entry, message}, _from, entries) do
+  #   new_entries = [message | entries]
+  #   {:reply, new_entries, new_entries}
+  # end
 end
 ```
 

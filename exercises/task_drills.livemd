@@ -28,10 +28,25 @@ Use [Task.async/1](https://hexdocs.pm/elixir/Task.html#async/1) and [Task.await/
 
 ```
 
+```elixir
+spawn_pid =
+  spawn(fn ->
+    IO.puts("Job Started")
+    Process.sleep(1000)
+    IO.puts("job ended")
+  end)
+```
+
 Use [Task.async/1](https://hexdocs.pm/elixir/Task.html#async/1) and [Task.await/2](https://hexdocs.pm/elixir/Task.html#await/2) to spawn a task process that sleeps for six seconds. It should cause a timeout error.
 
 ```elixir
+task =
+  Task.async(fn ->
+    Process.sleep(6000)
+    "I'm sleepy!"
+  end)
 
+Task.await(task)
 ```
 
 Use [Task.async/1](https://hexdocs.pm/elixir/Task.html#async/1) and [Task.await/2](https://hexdocs.pm/elixir/Task.html#await/2) to spawn a task process that sleeps for six seconds. Provide a timeout value to [Task.await/2](https://hexdocs.pm/elixir/Task.html#await/2) so that it properly awaits the response.
@@ -107,7 +122,14 @@ Use [Task.async/1](https://hexdocs.pm/elixir/Task.html#async/1) and [Task.yield/
 Use [Task.async/1](https://hexdocs.pm/elixir/Task.html#async/1), [Task.yield/2](https://hexdocs.pm/elixir/Task.html#yield/2), and [Task.shutdown/2](https://hexdocs.pm/elixir/Task.html#shutdown/2) to spawn a task process that sleeps for six seconds. Shutdown the task process if it does not yield any value.
 
 ```elixir
+task =
+  Task.async(fn ->
+    Process.sleep(6000)
+    IO.puts("Something's here!")
+  end)
 
+# || Task.shutdown(task)
+Task.await(task, 3000)
 ```
 
 ## Task.await_many/2

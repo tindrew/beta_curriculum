@@ -126,7 +126,8 @@ defmodule TrafficLightServer do
   @doc """
   Start a TrafficLightServer linked to the current caller process.
   """
-  def start_link(opts) do
+  def start_link(_opts) do
+    GenServer.start_link(__MODULE__, [])
   end
 
   @doc """
@@ -134,14 +135,51 @@ defmodule TrafficLightServer do
   :green -> :yellow -> :red
   """
   def transition(pid) do
+    GenServer.call(pid, :transition)
   end
 
   @doc """
   Get the `TrafficLightServer`'s current state.
   """
   def current_light(pid) do
+    GenServer.call(pid, :current_light)
+  end
+
+  def init(_opts) do
+    {:ok, :green}
+  end
+
+  def handle_call(:transition, _from, state) do
+    next_state =
+      case state do
+        :green -> :yellow
+        :yellow -> :red
+        :red -> :green
+      end
+
+    {:reply, next_state, next_state}
+  end
+
+  def handle_call(:current_light, _from, state) do
+    {:reply, state, state}
   end
 end
+```
+
+```elixir
+{:ok, pid} = GenServer.start_link(TrafficLightServer, [])
+```
+
+```elixir
+:green = GenServer.call(pid, :current_light)
+```
+
+```elixir
+{:ok, pid} = TrafficLightServer.start_link([])
+```
+
+```elixir
+:green = TrafficLightServer.current_light(pid)
 ```
 
 ## Bonus: TrafficGrid

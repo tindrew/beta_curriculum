@@ -79,6 +79,23 @@ Here's that data represented as a `Pokemon` struct.
 }
 ```
 
+```elixir
+defmodule PokemonStuff do
+  defstruct 
+    :id,
+    :name,
+    :hp,
+    :attack,
+    :defense,
+    :special_attack,
+    :special_defense,
+    speed: integer
+    weight: integer
+    height: integer
+    types: list of strings
+end
+```
+
 ## Get A Pokemon
 
 We can request information about Pokemon using the [Pokemon API](https://pokeapi.co/).

@@ -236,6 +236,7 @@ Use [Jason.decode!/2](https://hexdocs.pm/jason/Jason.html#encode!/2) to decode t
 
 ```elixir
 json = "{\"hello\"\: \"world\"}"
+Jason.decode!(json)
 ```
 
 ## Poison

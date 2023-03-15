@@ -325,6 +325,59 @@ end
 {:ok, counter_pid} = GenServer.start_link(DecrementingCounter, [])
 ```
 
+```elixir
+defmodule CounterServer do
+  use GenServer
+
+  #### CLIENT #####
+  def start_link(_opts) do
+    GenServer.start_link(CounterServer, [])
+  end
+
+  def increment(pid) do
+    Process.sleep(3000)
+    GenServer.cast(pid, :increment)
+  end
+
+  def decrement(pid) do
+    GenServer.cast(pid, :decrement)
+  end
+
+  def get_count(pid) do
+    GenServer.call(pid, :get_count)
+  end
+
+  #### SERVER #####
+
+  @impl true
+  def init(_opts) do
+    {:ok, 0}
+  end
+
+  @impl true
+  def handle_cast(:increment, state) do
+    {:noreply, state + 1}
+  end
+
+  @impl true
+  def handle_cast(:decrement, state) do
+    {:noreply, state - 1}
+  end
+
+  @impl true
+  def handle_call(:get_count, _from, state) do
+    response = state
+    {:reply, response, state}
+  end
+end
+
+{:ok, pid} = CounterServer.start_link([])
+CounterServer.increment(pid)
+CounterServer.get_count(pid)
+# CounterServer.decrement(pid)
+# CounterServer.get_count(pid)
+```
+
 ## Further Reading
 
 Consider the following resource(s) to deepen your understanding of the topic.

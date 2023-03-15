@@ -144,6 +144,10 @@ end
 Implement the `Pokemon` GenServer and struct definition as documented below.
 
 ```elixir
+list = [{:books}]
+```
+
+```elixir
 defmodule Pokemon do
   @moduledoc """
   Pokemon Server

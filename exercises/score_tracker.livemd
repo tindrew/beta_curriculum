@@ -87,7 +87,11 @@ defmodule ScoreTracker do
 
     iex> {:ok, pid} = ScoreTracker.start_link([])
   """
+
+  ### CLIENT ###
+
   def start_link(_opts) do
+    GenServer.start_link(ScoreTracker, [])
   end
 
   @doc """
@@ -95,9 +99,9 @@ defmodule ScoreTracker do
 
   ## Examples
 
-      iex> {:ok, pid} = ScoreTracker.start_link([])
-      iex> ScoreTracker.score(pid, 10)
-      :ok
+      # iex> {:ok, pid} = ScoreTracker.start_link([])
+      # iex> ScoreTracker.score(pid, 10)
+      # :ok
   """
   def score(score_tracker_pid, amount) do
   end
@@ -107,11 +111,18 @@ defmodule ScoreTracker do
 
   ## Examples
 
-      iex> {:ok, pid} = ScoreTracker.start_link([])
-      iex> ScoreTracker.get_score(pid)
-      0
+      # iex> {:ok, pid} = ScoreTracker.start_link([])
+      # iex> ScoreTracker.get_score(pid)
+      # 0
   """
   def get_score(score_tracker_pid) do
+  end
+
+  ### SERVER ####
+
+  @impl true
+  def init(state) do
+    {:ok, []}
   end
 end
 ```

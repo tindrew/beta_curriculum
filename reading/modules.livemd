@@ -108,7 +108,7 @@ end
 Call the `MutliParamExample.call/3` function with different arguments.
 
 ```elixir
-
+MultiParamExample.call("something", :this, "annoyed")
 ```
 
 ## Internal Module Functions
@@ -218,7 +218,7 @@ HigherOrder.higher_order_function(&Callback.callback_function/0)
 Notice we cannot simply pass `Callback.callback_function` as an argument.
 
 ```elixir
-HigherOrder.higher_order_function(Callback.callback_function())
+HigherOrder.higher_order_function(&Callback.callback_function/0)
 ```
 
 Alternatively, we can wrap the callback function in an anonymous function.
@@ -306,7 +306,13 @@ end
 Enter your solution below.
 
 ```elixir
+defmodule Languages.Korean do
+  def greeting do
+    "Anyonghasayo"
+  end
+end
 
+Languages.Korean.greeting()
 ```
 
 ### Nested Modules
@@ -504,7 +510,18 @@ end
 </details>
 
 ```elixir
+defmodule Math do
+  def add(num1, num2) do
+    num1 + num2
+  end
 
+  def add(num1, num2, num3) do
+    num1 + num2 + num3
+  end
+end
+
+Math.add(2, 3)
+Math.add(3, 44, 84)
 ```
 
 ## Default Arguments
@@ -656,7 +673,7 @@ defmodule DoctestFailure do
     "expected return value"
   """
   def test do
-    "actual return value"
+    "expected return value"
   end
 end
 ```
@@ -699,9 +716,9 @@ Uncomment the following code and evaluate the cell to see an example. Re-comment
 #     iex> {} = DoctestCrash.crash()
 #     "2"
 #   """
-#   def crash do
+# def crash do
 
-#   end
+# end
 # end
 ```
 
